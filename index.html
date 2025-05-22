@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmic Age | Modern Age Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="particles-container" id="particles-js"></div>
+  
+  <div class="container">
+    <div class="theme-toggle">
+      <button id="themeBtn"><i class="fas fa-moon"></i></button>
+    </div>
+    <div class="language-toggle">
+      <button id="langBtn" class="lang-en">বাংলা</button>
+    </div>
+    
+    <header class="hero">
+      <div class="hero-content">
+        <h1 class="en"><span class="gradient-text">Cosmic Age</span></h1>
+        <h1 class="bn" style="display:none;"><span class="gradient-text">কসমিক বয়স</span></h1>
+        <p class="en">Discover your exact age in the universe</p>
+        <p class="bn" style="display:none;">মহাবিশ্বে আপনার সঠিক বয়স আবিষ্কার করুন</p>
+      </div>
+      <div class="hero-illustration">
+        <div class="planet"></div>
+        <div class="ring"></div>
+        <div class="satellite"></div>
+      </div>
+    </header>
+    
+    <div class="calculator-card glass">
+      <div class="input-section">
+        <div class="section-header">
+          <div class="icon-circle pulse">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <h2 class="en">Enter Your Birth Date</h2>
+          <h2 class="bn" style="display:none;">আপনার জন্ম তারিখ লিখুন</h2>
+        </div>
+        
+        <div class="date-input">
+          <div class="input-group">
+            <label class="en">Day</label>
+            <label class="bn" style="display:none;">দিন</label>
+            <div class="input-wrapper">
+              <input type="text" id="day" placeholder="DD" maxlength="2" class="num-input">
+              <div class="input-decoration"></div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="en">Month</label>
+            <label class="bn" style="display:none;">মাস</label>
+            <div class="input-wrapper">
+              <input type="text" id="month" placeholder="MM" maxlength="2" class="num-input">
+              <div class="input-decoration"></div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="en">Year</label>
+            <label class="bn" style="display:none;">বছর</label>
+            <div class="input-wrapper">
+              <input type="text" id="year" placeholder="YYYY" maxlength="4" class="num-input">
+              <div class="input-decoration"></div>
+            </div>
+          </div>
+        </div>
+        
+        <button id="calculateBtn" class="btn-gradient en">
+          <span>Calculate Age</span>
+          <div class="hover-effect"></div>
+        </button>
+        <button id="calculateBtnBn" class="btn-gradient bn" style="display:none;">
+          <span>বয়স নির্ণয় করুন</span>
+          <div class="hover-effect"></div>
+        </button>
+      </div>
+      
+      <div class="result-section" style="display:none;">
+        <div class="result-header">
+          <div class="icon-circle">
+            <i class="fas fa-user-astronaut"></i>
+          </div>
+          <h2 class="en">Your Cosmic Age</h2>
+          <h2 class="bn" style="display:none;">আপনার মহাজাগতিক বয়স</h2>
+          <button id="backBtn" class="btn-outline en">
+            <i class="fas fa-arrow-left"></i> Back
+          </button>
+          <button id="backBtnBn" class="btn-outline bn" style="display:none;">
+            <i class="fas fa-arrow-left"></i> পিছনে
+          </button>
+        </div>
+        
+        <div class="result-grid">
+          <!-- Age Visualization -->
+          <div class="result-card glass age-visualization">
+            <div class="visualization-container">
+              <div class="age-circle">
+                <div class="circle-progress" id="yearsProgress"></div>
+                <div class="circle-center">
+                  <span id="ageYears">0</span>
+                  <small class="en">Years</small>
+                  <small class="bn" style="display:none;">বছর</small>
+                </div>
+              </div>
+              <div class="age-bars">
+                <div class="age-bar">
+                  <div class="bar-label en">Months</div>
+                  <div class="bar-label bn" style="display:none;">মাস</div>
+                  <div class="bar-container">
+                    <div class="bar-fill" id="monthsBar"></div>
+                  </div>
+                  <div class="bar-value" id="monthsValue">0</div>
+                </div>
+                <div class="age-bar">
+                  <div class="bar-label en">Days</div>
+                  <div class="bar-label bn" style="display:none;">দিন</div>
+                  <div class="bar-container">
+                    <div class="bar-fill" id="daysBar"></div>
+                  </div>
+                  <div class="bar-value" id="daysValue">0</div>
+                </div>
+              </div>
+            </div>
+            <div class="exact-age">
+              <i class="fas fa-clock"></i>
+              <span id="exactAge"></span>
+            </div>
+          </div>
+          
+          <!-- Basic Info -->
+          <div class="result-card glass">
+            <div class="card-header">
+              <i class="fas fa-info-circle"></i>
+              <h3 class="en">Basic Information</h3>
+              <h3 class="bn" style="display:none;">মৌলিক তথ্য</h3>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-birthday-cake"></i>
+              <div>
+                <span class="en">Born on:</span>
+                <span class="bn" style="display:none;">জন্ম তারিখ:</span>
+                <span id="birthDay"></span>
+              </div>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-calendar-day"></i>
+              <div>
+                <span class="en">Bangla date:</span>
+                <span class="bn" style="display:none;">বাংলা তারিখ:</span>
+                <span id="banglaDate"></span>
+              </div>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-gift"></i>
+              <div>
+                <span class="en">Next birthday:</span>
+                <span class="bn" style="display:none;">পরবর্তী জন্মদিন:</span>
+                <span id="nextBirthday"></span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Planetary Ages -->
+          <div class="result-card glass">
+            <div class="card-header">
+              <i class="fas fa-globe-americas"></i>
+              <h3 class="en">Planetary Ages</h3>
+              <h3 class="bn" style="display:none;">গ্রহের বয়স</h3>
+            </div>
+            <div class="planet-grid">
+              <div class="planet-item">
+                <div class="planet-icon mercury"></div>
+                <span>Mercury</span>
+                <span id="mercuryAge"></span>
+              </div>
+              <div class="planet-item">
+                <div class="planet-icon venus"></div>
+                <span>Venus</span>
+                <span id="venusAge"></span>
+              </div>
+              <div class="planet-item">
+                <div class="planet-icon earth"></div>
+                <span>Earth</span>
+                <span id="earthAge"></span>
+              </div>
+              <div class="planet-item">
+                <div class="planet-icon mars"></div>
+                <span>Mars</span>
+                <span id="marsAge"></span>
+              </div>
+              <div class="planet-item">
+                <div class="planet-icon jupiter"></div>
+                <span>Jupiter</span>
+                <span id="jupiterAge"></span>
+              </div>
+              <div class="planet-item">
+                <div class="planet-icon saturn"></div>
+                <span>Saturn</span>
+                <span id="saturnAge"></span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Zodiac & More -->
+          <div class="result-card glass">
+            <div class="card-header">
+              <i class="fas fa-star"></i>
+              <h3 class="en">Zodiac & More</h3>
+              <h3 class="bn" style="display:none;">রাশিচক্র ও আরও</h3>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-sun"></i>
+              <div>
+                <span class="en">Zodiac sign:</span>
+                <span class="bn" style="display:none;">রাশিচক্র:</span>
+                <span id="zodiacSign"></span>
+              </div>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-dragon"></i>
+              <div>
+                <span class="en">Chinese zodiac:</span>
+                <span class="bn" style="display:none;">চাইনিজ রাশিচক্র:</span>
+                <span id="chineseZodiac"></span>
+              </div>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-gem"></i>
+              <div>
+                <span class="en">Birthstone:</span>
+                <span class="bn" style="display:none;">জন্মপাথর:</span>
+                <span id="birthstone"></span>
+              </div>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-spa"></i>
+              <div>
+                <span class="en">Birth flower:</span>
+                <span class="bn" style="display:none;">জন্মফুল:</span>
+                <span id="birthFlower"></span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Life Statistics -->
+          <div class="result-card glass">
+            <div class="card-header">
+              <i class="fas fa-heartbeat"></i>
+              <h3 class="en">Life Statistics</h3>
+              <h3 class="bn" style="display:none;">জীবনের পরিসংখ্যান</h3>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-history"></i>
+              <div>
+                <span class="en">Leap years lived:</span>
+                <span class="bn" style="display:none;">লিপ ইয়ার:</span>
+                <span id="leapYears"></span>
+              </div>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-heart"></i>
+              <div>
+                <span class="en">Heartbeats (approx):</span>
+                <span class="bn" style="display:none;">হৃদস্পন্দন (আনুমানিক):</span>
+                <span id="heartbeats"></span>
+              </div>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-moon"></i>
+              <div>
+                <span class="en">Full moons seen:</span>
+                <span class="bn" style="display:none;">পূর্ণিমা দেখা:</span>
+                <span id="fullMoons"></span>
+              </div>
+            </div>
+            <div class="result-item">
+              <i class="fas fa-chart-line"></i>
+              <div>
+                <span class="en">Life progress:</span>
+                <span class="bn" style="display:none;">জীবনের অগ্রগতি:</span>
+                <div class="progress-container">
+                  <div class="progress-bar">
+                    <div id="lifeProgress"></div>
+                  </div>
+                  <span id="lifePercentage"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Time Units -->
+          <div class="result-card glass">
+            <div class="card-header">
+              <i class="fas fa-hourglass-half"></i>
+              <h3 class="en">Time Alive</h3>
+              <h3 class="bn" style="display:none;">জীবনের সময়</h3>
+            </div>
+            <div class="time-grid">
+              <div class="time-unit">
+                <div class="time-value" id="monthsOld">0</div>
+                <div class="time-label en">Months</div>
+                <div class="time-label bn" style="display:none;">মাস</div>
+              </div>
+              <div class="time-unit">
+                <div class="time-value" id="weeksOld">0</div>
+                <div class="time-label en">Weeks</div>
+                <div class="time-label bn" style="display:none;">সপ্তাহ</div>
+              </div>
+              <div class="time-unit">
+                <div class="time-value" id="daysOld">0</div>
+                <div class="time-label en">Days</div>
+                <div class="time-label bn" style="display:none;">দিন</div>
+              </div>
+              <div class="time-unit">
+                <div class="time-value" id="hoursOld">0</div>
+                <div class="time-label en">Hours</div>
+                <div class="time-label bn" style="display:none;">ঘন্টা</div>
+              </div>
+              <div class="time-unit">
+                <div class="time-value" id="minutesOld">0</div>
+                <div class="time-label en">Minutes</div>
+                <div class="time-label bn" style="display:none;">মিনিট</div>
+              </div>
+              <div class="time-unit">
+                <div class="time-value" id="secondsOld">0</div>
+                <div class="time-label en">Seconds</div>
+                <div class="time-label bn" style="display:none;">সেকেন্ড</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="share-section">
+          <button id="shareBtn" class="btn-gradient en">
+            <i class="fas fa-share-alt"></i> Share Results
+            <div class="hover-effect"></div>
+          </button>
+          <button id="shareBtnBn" class="btn-gradient bn" style="display:none;">
+            <i class="fas fa-share-alt"></i> ফলাফল শেয়ার করুন
+            <div class="hover-effect"></div>
+          </button>
+          <div id="qrCode" class="qr-code"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="fun-facts-section" style="display:none;">
+      <div class="section-header">
+        <div class="icon-circle">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h2 class="en">More About Your Birth Date</h2>
+        <h2 class="bn" style="display:none;">আপনার জন্ম তারিখ সম্পর্কে আরও</h2>
+      </div>
+      
+      <div class="facts-grid">
+        <div class="fact-card glass">
+          <div class="fact-icon">
+            <i class="fas fa-user-friends"></i>
+          </div>
+          <h3 class="en">Famous People</h3>
+          <h3 class="bn" style="display:none;">বিখ্যাত ব্যক্তি</h3>
+          <p id="famousPeople" class="en"></p>
+          <p id="famousPeopleBn" class="bn" style="display:none;"></p>
+        </div>
+        
+        <div class="fact-card glass">
+          <div class="fact-icon">
+            <i class="fas fa-landmark"></i>
+          </div>
+          <h3 class="en">Historical Events</h3>
+          <h3 class="bn" style="display:none;">ঐতিহাসিক ঘটনা</h3>
+          <p id="historicalEvents" class="en"></p>
+          <p id="historicalEventsBn" class="bn" style="display:none;"></p>
+        </div>
+        
+        <div class="fact-card glass">
+          <div class="fact-icon">
+            <i class="fas fa-music"></i>
+          </div>
+          <h3 class="en">Popular Culture</h3>
+          <h3 class="bn" style="display:none;">জনপ্রিয় সংস্কৃতি</h3>
+          <div id="popularCulture" class="en"></div>
+          <div id="popularCultureBn" class="bn" style="display:none;"></div>
+        </div>
+        
+        <div class="fact-card glass">
+          <div class="fact-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3 class="en">Technology Timeline</h3>
+          <h3 class="bn" style="display:none;">প্রযুক্তির সময়রেখা</h3>
+          <p id="technologyTimeline" class="en"></p>
+          <p id="technologyTimelineBn" class="bn" style="display:none;"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
