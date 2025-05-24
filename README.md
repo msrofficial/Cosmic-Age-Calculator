@@ -2,7 +2,7 @@
 
 A modern, interactive age calculator that shows your age in various cosmic measurements including planetary years, zodiac signs, and life statistics.
 
-![Cosmic Age Calculator Screenshot](screenshot.png) *(Add your screenshot here)*
+![Cosmic Age Calculator Screenshot](Screenshot_20250524-141641.png)
 
 ## Features ✨
 
